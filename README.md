@@ -6,7 +6,7 @@ Tested up to: 1.6.1.6
 Stable tag: 1.0.0  
 License: GNU General Public License, version 3  
 
-**getSale** - .
+**getSale** - профессиональный инструмент для создания popup-окон.
 
 ## Установка
 - Зайдите в административную панель сайта PrestaShop.

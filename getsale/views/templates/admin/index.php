@@ -1,9 +1,9 @@
 <?php
 /**
- * 2016 getSale
+ * 2016 GetSale
  *
- * @author    getSale RU <http://getsale.io/>
- * @copyright 2016 getSale
+ * @author    GetSale Team <http://getsale.io/>
+ * @copyright 2016 GetSale
  * @license   GNU General Public License, version 3
  */
 

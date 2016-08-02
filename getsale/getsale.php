@@ -1,9 +1,9 @@
 <?php
 /**
- * 2016 getSale
+ * 2016 GetSale
  *
- * @author    getSale RU <http://getsale.io/>
- * @copyright 2016 getSale
+ * @author    GetSale Team <http://getsale.io/>
+ * @copyright 2016 GetSale
  * @license   GNU General Public License, version 3
  */
 
@@ -14,16 +14,16 @@ class Getsale extends Module
         $this->name = 'getsale';
         $this->tab = 'analytics_stats';
         $this->config_form = 'password';
-        $this->version = '1.0.0';
-        $this->author = 'getSale Team';
+        $this->version = '1.0.3';
+        $this->author = 'GetSale Team';
         $this->need_instance = 1;
 
         $this->bootstrap = true;
         parent::__construct();
 
-        $this->displayName = $this->l('getSale');
-        $this->description = $this->l('Профессиональный инструмент для создания popup-окон');
-        $this->confirmUninstall = $this->l('Вы действительно хотите удалить модуль getSale?');
+        $this->displayName = $this->l('GetSale');
+        $this->description = $this->l('Профессиональный инструмент для создания popup-окон.');
+        $this->confirmUninstall = $this->l('Вы действительно хотите удалить модуль GetSale?');
     }
 
     public function install()
@@ -42,7 +42,10 @@ class Getsale extends Module
         return parent::install() &&
         $this->registerHook('displayTop') &&
         $this->registerHook('displayHeader') &&
+        $this->registerHook('ActionCustomerAccountAdd') &&
         $this->registerHook('displayFooter') &&
+        $this->registerHook('backOfficeHeader') &&
+        $this->registerHook('displayProductButtons') &&
         $this->installDB();
     }
 
@@ -87,7 +90,7 @@ class Getsale extends Module
             if (!empty($getsale_key) && !empty($getsale_email)) {
                 Configuration::updateValue('getsale_key', $getsale_key);
                 Configuration::updateValue('getsale_email', $getsale_email);
-                $output = $this->displayConfirmation($this->l('Поздравляем, сайт успешно привязан к аккаунту') . ' <a href="http://getsale.io" target="_blank">getSale</a>') . $this->displayFormSuccess() . $output;
+                $output = $this->displayConfirmation($this->l('Поздравляем, сайт успешно привязан к аккаунту') . ' <a href="http://getsale.io" target="_blank">GetSale</a>') . $this->displayFormSuccess() . $output;
             }
         }
         if (!Configuration::get('getsale_key') && !Configuration::get('getsale_email')) {
@@ -107,12 +110,12 @@ class Getsale extends Module
                     if ($result['ok']) {
                         $output = $this->context->smarty->fetch($this->local_path . 'views/templates/admin/configure.tpl');
                         $output = $this->displayConfirmation($this->l('Поздравляем, сайт успешно привязан к
-                         аккаунту') . ' <a href="http://getsale.io" target="_blank">getSale</a>') . $this->displayFormSuccess() . $output;
+                         аккаунту') . ' <a href="http://getsale.io" target="_blank">GetSale</a>') . $this->displayFormSuccess() . $output;
                     }
                 }
             } else {
                 $output = $this->context->smarty->fetch($this->local_path . 'views/templates/admin/configure.tpl');
-                $output = $this->displayConfirmation($this->l('Поздравляем, сайт успешно привязан к аккаунту') . ' <a href="http://getsale.io" target="_blank">getSale</a>') . $this->displayFormSuccess() . $output;
+                $output = $this->displayConfirmation($this->l('Поздравляем, сайт успешно привязан к аккаунту') . ' <a href="http://getsale.io" target="_blank">GetSale</a>') . $this->displayFormSuccess() . $output;
             }
 
             return $output;
@@ -144,56 +147,58 @@ class Getsale extends Module
     {
         $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
         //ширина полей в админке модуля
-        $getsale_col = '6';
+        $ulogin_col = '6';
         // Описываем поля формы для страници настроек
         $fields_form = array();
         $fields_form[0]['form'] = array(
             'legend' => array(
-                'title' => $this->l('getSale') . '  &mdash; ' . $this->l('Профессиональный инструмент для создания popup-окон'),
+                'title' => $this->l('GetSale') . '  &mdash; ' . $this->l('профессиональный инструмент для создания popup-окон.'),
                 'icon' => 'icon-cogs'
             ),
             'input' => array(
                 array(
                     'type' => 'free',
-                    'col' => $getsale_col,
-                    'desc' => $this->l('Оцените принципиально новый подход к созданию popup-окон.'),
+                    'col' => $ulogin_col,
+                    'desc' => $this->l('GetSale поможет вашему сайту нарастить контактную базу лояльных клиентов,
+                    информировать посетителей о предстоящих акциях, распродажах, раздавать промокоды, скидки и многое
+                    другое, что напрямую повлияет на конверсии покупателей и рост продаж.'),
                     'name' => 'text'),
                 array(
                     'type' => 'text',
                     'label' => $this->l('Email'),
                     'name' => 'getsale_email',
                     'required' => true,
-                    'col' => $getsale_col,
+                    'col' => $ulogin_col,
                 ),
                 array(
                     'type' => 'text',
                     'label' => $this->l('Ключ API'),
                     'name' => 'getsale_key',
                     'required' => true,
-                    'col' => $getsale_col,
+                    'col' => $ulogin_col,
                 ),
                 array(
                     'type' => 'free',
-                    'col' => $getsale_col,
+                    'col' => $ulogin_col,
                     'desc' => $this->l('Введите email и ключ API из личного кабинета ')
-                        . '<a href="http://getsale.io" target="_blank">getSale.ru</a>',
+                        . '<a href="http://getsale.io" target="_blank">GetSale</a>',
                     'name' => 'text'),
                 array(
                     'type' => 'free',
-                    'col' => $getsale_col,
-                    'desc' => $this->l('Если вы ещё не зарегистрировались в сервисе getSale это можно
-                    сделать по ссылке ') . '<a href="http://getsale.io" target="_blank">getSale.ru</a>',
+                    'col' => $ulogin_col,
+                    'desc' => $this->l('Если вы ещё не зарегистрировались в сервисе GetSale это можно
+                    сделать по ссылке ') . '<a href="http://getsale.io" target="_blank">GetSale</a>',
                     'name' => 'text'),
                 array(
                     'type' => 'free',
-                    'col' => $getsale_col,
+                    'col' => $ulogin_col,
                     'desc' => $this->l('Служба технической поддержки: ')
-                        . '<a href="mailto:plugins@getsale.io">plugins@getsale.io</a>',
+                        . '<a href="mailto:support@getsale.io">support@getsale.io</a>',
                     'name' => 'text'),
                 array(
                     'type' => 'free',
-                    'col' => $getsale_col,
-                    'desc' => $this->l('PrestaShop getSale ver.') . $this->version,
+                    'col' => $ulogin_col,
+                    'desc' => $this->l('PrestaShop GetSale ver.') . $this->version,
                     'name' => 'text')
             ),
             'submit' => array('title' => $this->l('Сохранить настройки'),
@@ -235,49 +240,53 @@ class Getsale extends Module
     {
         $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
         //ширина полей в админке модуля
-        $getsale_col = '6';
+        $ulogin_col = '6';
         // Описываем поля формы для страници настроек
         $fields_form = array();
         $fields_form[0]['form'] = array(
             'legend' => array(
-                'title' => $this->l('getSale') . '  &mdash; ' . $this->l('Профессиональный инструмент для создания popup-окон'),
+                'title' => $this->l('GetSale') . '  &mdash; ' . $this->l('профессиональный инструмент для создания popup-окон'),
                 'icon' => 'icon-cogs'
             ),
             'input' => array(
                 array(
                     'type' => 'free',
-                    'col' => $getsale_col,
-                    'desc' => $this->l('Оцените принципиально новый подход к созданию popup-окон'),
+                    'col' => $ulogin_col,
+                    'desc' => $this->l('GetSale поможет вашему сайту нарастить контактную базу лояльных клиентов,
+                    информировать посетителей о предстоящих акциях, распродажах, раздавать промокоды, скидки и многое
+                    другое, что напрямую повлияет на конверсии покупателей и рост продаж. Для новичков доступны десятки
+                    предустановленных дизайнов, а профессионалам многофункциональный конструктор позволит реализовать
+                    практически любой дизайн, настроив его на самые нужные сегменты посетителей и их действия.'),
                     'name' => 'text'),
                 array(
                     'type' => 'text',
                     'label' => $this->l('Email'),
                     'name' => 'getsale_email',
-                    'col' => $getsale_col,
+                    'col' => $ulogin_col,
                 ),
                 array(
                     'type' => 'text',
                     'label' => $this->l('Ключ API'),
                     'name' => 'getsale_key',
-                    'col' => $getsale_col,
+                    'col' => $ulogin_col,
                 ),
                 array(
                     'type' => 'free',
-                    'col' => $getsale_col,
+                    'col' => $ulogin_col,
                     'desc' => $this->l('Войдите в личный кабинет ')
-                        . '<a href="http://getsale.io" target="_blank">getSale.ru</a>'
+                        . '<a href="http://getsale.io" target="_blank">GetSale</a>'
                         . $this->l(' для просмотра статистики.'),
                     'name' => 'text'),
                 array(
                     'type' => 'free',
-                    'col' => $getsale_col,
+                    'col' => $ulogin_col,
                     'desc' => $this->l('Служба технической поддержки: ')
-                        . '<a href="mailto:plugins@getsale.io">plugins@getsale.io</a>',
+                        . '<a href="mailto:support@getsale.io">support@getsale.io</a>',
                     'name' => 'text'),
                 array(
                     'type' => 'free',
-                    'col' => $getsale_col,
-                    'desc' => $this->l('PrestaShop getSale ver.') . $this->version,
+                    'col' => $ulogin_col,
+                    'desc' => $this->l('PrestaShop GetSale ver.') . $this->version,
                     'name' => 'text')
             ),
             'submit' => array('title' => $this->l('Сохранить настройки'),
@@ -313,7 +322,7 @@ class Getsale extends Module
         $helper->fields_value['getsale_key'] = Configuration::get('getsale_key');
         $helper->fields_value['getsale_email'] = Configuration::get('getsale_email');
         return $helper->generateForm($fields_form) . "<style>
-        .gtsl_ok{
+        .intrg_ok{
             right: 5px;
             top: 6px;
             position: absolute;
@@ -324,8 +333,8 @@ class Getsale extends Module
         $(document).ready(function () {
                 $('input[id=getsale_email]').attr('disabled', 'disabled');
                 $('input[id=getsale_key]').attr('disabled', 'disabled');
-                $('input[id=getsale_email]').before(\"<img title='Введен правильный email!' class='gtsl_ok' src='$this->_path/views/img/ok.png' >\");
-                $('input[id=getsale_key]').before(\"<img title='Введен правильный email!' class='gtsl_ok' src='$this->_path/views/img/ok.png' >\");
+                $('input[id=getsale_email]').before(\"<img title='Введен правильный email!' class='intrg_ok' src='$this->_path/views/img/ok.png' >\");
+                $('input[id=getsale_key]').before(\"<img title='Введен правильный email!' class='intrg_ok' src='$this->_path/views/img/ok.png' >\");
              });
             </script>";
     }
@@ -382,6 +391,84 @@ class Getsale extends Module
         return true;
     }
 
+    public $itemjscode = "
+        <script type='text/javascript'>
+                (function(w, c) {
+                    w[c] = w[c] || [];
+                    w[c].push(function(getSale) {
+                        getSale.event('item-view');
+                    });
+                })(window, 'getSaleCallbacks');
+        </script>";
+
+    public $catjscode = "
+        <script type='text/javascript'>
+                (function(w, c) {
+                    w[c] = w[c] || [];
+                    w[c].push(function(getSale) {
+                        getSale.event('cat-view');
+                    });
+                })(window, 'getSaleCallbacks');
+        </script>";
+
+    public $addtocartjscode = "
+        <script type='text/javascript'>
+
+                $(function(){
+                    $('.quick-view').click(function(){
+                        getSale.event('item-view');
+                    });
+                });
+
+                $(function(){
+                    $('.ajax_add_to_cart_button').click(function(){
+                        getSale.event('add-to-cart');
+                    })
+                });
+        </script>";
+
+    public $ajaxaddtocartjscode = "
+        <script type='text/javascript'>
+                    document.getElementById('add_to_cart').onclick = function() {
+                        getSale.event('add-to-cart');
+                    };
+</script>";
+
+    public $delitemjscode = "
+        <script type='text/javascript'>
+                $(function(){
+                  $('.ajax_cart_block_remove_link').click(function(){
+                      getSale.event('del-from-cart');
+                  });
+                });
+
+                $(function(){
+                    $('.cart_quantity_delete').click(function(){
+                        getSale.event('del-from-cart');
+                    });
+                });
+        </script>";
+
+    public $orderjscode = "
+        <script type='text/javascript'>
+        (function(w, c) {
+            w[c] = w[c] || [];
+            w[c].push(function(getSale) {
+                getSale.event('success-order');
+            });
+        })(window, 'getSaleCallbacks');
+        </script>";
+
+    public $regjscode = "
+     <script type='text/javascript'>
+                (function(w, c) {
+                    w[c] = w[c] || [];
+                    w[c].push(function(getSale) {
+                        getSale.event('user-reg');
+                    });
+                })(window, 'getSaleCallbacks');
+    </script>";
+
     public function getsalejscode($id)
     {
         $jscode = "<script type='text/javascript'>
@@ -411,6 +498,29 @@ class Getsale extends Module
     {
     }
 
+    public function hookActionCustomerAccountAdd($params)
+    {
+        if ($params['newCustomer']->id) {
+            Db::getInstance()->insert('getsale_table', array(
+                'user_id' => $params['newCustomer']->id,
+                'user-reg' => 0));
+        }
+    }
+
+    public function hookDisplayProductButtons()
+    {
+        $getsalejscode = '';
+
+        if (Configuration::get('getsale_id')) {
+            $getsalejscode .= $this->getsalejscode(Configuration::get('getsale_id'));
+            $getsalejscode .= $this->ajaxaddtocartjscode;
+        }
+
+        $this->context->smarty->assign('getsalejscode', $getsalejscode);
+        return $this->display(__FILE__, 'getsale.tpl');
+
+    }
+
     /* Вывод кода в шапке */
     public function hookDisplayTop($params)
     {
@@ -419,6 +529,55 @@ class Getsale extends Module
         $currcontroller = Tools::strtolower(get_class($this->context->controller));
         if (Configuration::get('getsale_id')) {
             $getsalejscode .= $this->getsalejscode(Configuration::get('getsale_id'));
+
+            $getsalejscode .= $this->addtocartjscode;
+            $getsalejscode .= $this->delitemjscode;
+
+            if ($currcontroller == 'productcontroller') {
+                $getsalejscode .= $this->itemjscode;
+                $getsalejscode .= $this->ajaxaddtocartjscode;
+            }
+
+            if ($currcontroller == 'categorycontroller') {
+                $getsalejscode .= $this->catjscode;
+            }
+
+            $context = Context::getContext();
+            if ($currcontroller == 'orderconfirmationcontroller') {
+                $current_order = Tools::getValue('id_order');
+                if (!empty($current_order) && $current_order != $context->cookie->intrgt_idord) {
+                    $this->context->cookie->__set('intrgt_idord', $current_order);
+                    $getsalejscode .= $this->orderjscode;
+                }
+            }
+
+            if ($currcontroller == 'myaccountcontroller') {
+                if ($context->customer->isLogged()) {
+                    $current_user = (int)$context->customer->id;
+                    $intrg_res = Db::getInstance()->getRow('SELECT * FROM ' . _DB_PREFIX_ . 'getsale_table
+                     WHERE user_id = ' . $current_user);
+                    if ($intrg_res['user-reg'] == 0) {
+                        $getsalejscode .= $this->regjscode;
+                        Db::getInstance()->execute('UPDATE ' . _DB_PREFIX_ . 'getsale_table SET `user-reg`
+                         = 2 WHERE id = ' . $intrg_res['id']);
+                    }
+                }
+            }
+
+            if ($currcontroller == 'addresscontroller') {
+                if (Tools::getValue('back') == 'order?step=1' || Tools::getValue('back') == 'order.php?step=1'
+                ) {
+                    if ($context->customer->isLogged()) {
+                        $current_user = (int)$context->customer->id;
+                        $intrg_res = Db::getInstance()->getRow('SELECT * FROM ' . _DB_PREFIX_ . 'getsale_table WHERE user_id = ' . $current_user);
+                        if ($intrg_res['user-reg'] == 0) {
+                            $getsalejscode .= $this->regjscode;
+                            Db::getInstance()->execute('UPDATE ' . _DB_PREFIX_ . 'getsale_table SET
+                            `user-reg` = 2 WHERE id = ' . $intrg_res['id']);
+                        }
+                    }
+                }
+            }
         }
         $this->context->smarty->assign('getsalejscode', $getsalejscode);
         return $this->display(__FILE__, 'getsale.tpl');

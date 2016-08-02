@@ -1,9 +1,9 @@
 {**
-* 2016 getSale
-* @author    getSale <http://getsale.io/>
-* @copyright 2016 getSale
+* 2016 GetSale
+* @author    GetSale <http://getsale.io/>
+* @copyright 2016 GetSale
 * @license   GNU General Public License, version 3
 *}
-<!-- Module Block getSale Code-->
+<!-- Module Block GetSale Code-->
 {$getsalejscode|escape:'UTF-8'}
-<!-- /MODULE Block getSale Code-->
+<!-- /MODULE Block GetSale Code-->

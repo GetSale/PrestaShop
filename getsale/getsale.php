@@ -12,9 +12,9 @@ class Getsale extends Module
     public function __construct()
     {
         $this->name = 'getsale';
-        $this->tab = 'analytics_stats';
+        $this->tab = 'others';
         $this->config_form = 'password';
-        $this->version = '1.0.3';
+        $this->version = '1.0.0';
         $this->author = 'GetSale Team';
         $this->need_instance = 1;
 
@@ -22,7 +22,7 @@ class Getsale extends Module
         parent::__construct();
 
         $this->displayName = $this->l('GetSale');
-        $this->description = $this->l('Профессиональный инструмент для создания popup-окон.');
+        $this->description = $this->l('Профессиональный инструмент для создания popup-окон');
         $this->confirmUninstall = $this->l('Вы действительно хотите удалить модуль GetSale?');
     }
 
@@ -152,7 +152,7 @@ class Getsale extends Module
         $fields_form = array();
         $fields_form[0]['form'] = array(
             'legend' => array(
-                'title' => $this->l('GetSale') . '  &mdash; ' . $this->l('профессиональный инструмент для создания popup-окон.'),
+                'title' => $this->l('GetSale') . '  &mdash; ' . $this->l('профессиональный инструмент для создания popup-окон'),
                 'icon' => 'icon-cogs'
             ),
             'input' => array(

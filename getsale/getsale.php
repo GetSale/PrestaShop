@@ -147,7 +147,7 @@ class Getsale extends Module
     {
         $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
         //ширина полей в админке модуля
-        $ulogin_col = '6';
+        $getsale_col = '6';
         // Описываем поля формы для страници настроек
         $fields_form = array();
         $fields_form[0]['form'] = array(
@@ -158,7 +158,7 @@ class Getsale extends Module
             'input' => array(
                 array(
                     'type' => 'free',
-                    'col' => $ulogin_col,
+                    'col' => $getsale_col,
                     'desc' => $this->l('GetSale поможет вашему сайту нарастить контактную базу лояльных клиентов,
                     информировать посетителей о предстоящих акциях, распродажах, раздавать промокоды, скидки и многое
                     другое, что напрямую повлияет на конверсии покупателей и рост продаж.'),
@@ -168,36 +168,36 @@ class Getsale extends Module
                     'label' => $this->l('Email'),
                     'name' => 'getsale_email',
                     'required' => true,
-                    'col' => $ulogin_col,
+                    'col' => $getsale_col,
                 ),
                 array(
                     'type' => 'text',
                     'label' => $this->l('Ключ API'),
                     'name' => 'getsale_key',
                     'required' => true,
-                    'col' => $ulogin_col,
+                    'col' => $getsale_col,
                 ),
                 array(
                     'type' => 'free',
-                    'col' => $ulogin_col,
+                    'col' => $getsale_col,
                     'desc' => $this->l('Введите email и ключ API из личного кабинета ')
                         . '<a href="http://getsale.io" target="_blank">GetSale</a>',
                     'name' => 'text'),
                 array(
                     'type' => 'free',
-                    'col' => $ulogin_col,
+                    'col' => $getsale_col,
                     'desc' => $this->l('Если вы ещё не зарегистрировались в сервисе GetSale это можно
                     сделать по ссылке ') . '<a href="http://getsale.io" target="_blank">GetSale</a>',
                     'name' => 'text'),
                 array(
                     'type' => 'free',
-                    'col' => $ulogin_col,
+                    'col' => $getsale_col,
                     'desc' => $this->l('Служба технической поддержки: ')
                         . '<a href="mailto:support@getsale.io">support@getsale.io</a>',
                     'name' => 'text'),
                 array(
                     'type' => 'free',
-                    'col' => $ulogin_col,
+                    'col' => $getsale_col,
                     'desc' => $this->l('PrestaShop GetSale ver.') . $this->version,
                     'name' => 'text')
             ),
@@ -240,7 +240,7 @@ class Getsale extends Module
     {
         $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
         //ширина полей в админке модуля
-        $ulogin_col = '6';
+        $getsale_col = '6';
         // Описываем поля формы для страници настроек
         $fields_form = array();
         $fields_form[0]['form'] = array(
@@ -251,7 +251,7 @@ class Getsale extends Module
             'input' => array(
                 array(
                     'type' => 'free',
-                    'col' => $ulogin_col,
+                    'col' => $getsale_col,
                     'desc' => $this->l('GetSale поможет вашему сайту нарастить контактную базу лояльных клиентов,
                     информировать посетителей о предстоящих акциях, распродажах, раздавать промокоды, скидки и многое
                     другое, что напрямую повлияет на конверсии покупателей и рост продаж. Для новичков доступны десятки
@@ -262,30 +262,30 @@ class Getsale extends Module
                     'type' => 'text',
                     'label' => $this->l('Email'),
                     'name' => 'getsale_email',
-                    'col' => $ulogin_col,
+                    'col' => $getsale_col,
                 ),
                 array(
                     'type' => 'text',
                     'label' => $this->l('Ключ API'),
                     'name' => 'getsale_key',
-                    'col' => $ulogin_col,
+                    'col' => $getsale_col,
                 ),
                 array(
                     'type' => 'free',
-                    'col' => $ulogin_col,
+                    'col' => $getsale_col,
                     'desc' => $this->l('Войдите в личный кабинет ')
                         . '<a href="http://getsale.io" target="_blank">GetSale</a>'
                         . $this->l(' для просмотра статистики.'),
                     'name' => 'text'),
                 array(
                     'type' => 'free',
-                    'col' => $ulogin_col,
+                    'col' => $getsale_col,
                     'desc' => $this->l('Служба технической поддержки: ')
                         . '<a href="mailto:support@getsale.io">support@getsale.io</a>',
                     'name' => 'text'),
                 array(
                     'type' => 'free',
-                    'col' => $ulogin_col,
+                    'col' => $getsale_col,
                     'desc' => $this->l('PrestaShop GetSale ver.') . $this->version,
                     'name' => 'text')
             ),

@@ -2,7 +2,7 @@
 /**
  * 2016 GetSale
  *
- * @author    GetSale Team <http://getsale.io/>
+ * @author    GetSale Team <https://getsale.io/>
  * @copyright 2016 GetSale
  * @license   GNU General Public License, version 3
  */
@@ -90,7 +90,7 @@ class Getsale extends Module
             if (!empty($getsale_key) && !empty($getsale_email)) {
                 Configuration::updateValue('getsale_key', $getsale_key);
                 Configuration::updateValue('getsale_email', $getsale_email);
-                $output = $this->displayConfirmation($this->l('Поздравляем, сайт успешно привязан к аккаунту') . ' <a href="http://getsale.io" target="_blank">GetSale</a>') . $this->displayFormSuccess() . $output;
+                $output = $this->displayConfirmation($this->l('Поздравляем, сайт успешно привязан к аккаунту') . ' <a href="https://getsale.io" target="_blank">GetSale</a>') . $this->l('Теперь вы можете создать виджеты в личном кабинете на' . ' <a href="https://getsale.io" target="_blank">GetSale</a>') . $this->displayFormSuccess() . $output;
             }
         }
         if (!Configuration::get('getsale_key') && !Configuration::get('getsale_email')) {
@@ -110,12 +110,12 @@ class Getsale extends Module
                     if ($result['ok']) {
                         $output = $this->context->smarty->fetch($this->local_path . 'views/templates/admin/configure.tpl');
                         $output = $this->displayConfirmation($this->l('Поздравляем, сайт успешно привязан к
-                         аккаунту') . ' <a href="http://getsale.io" target="_blank">GetSale</a>') . $this->displayFormSuccess() . $output;
+                         аккаунту') . ' <a href="https://getsale.io" target="_blank">GetSale</a>') . $this->displayFormSuccess() . $output;
                     }
                 }
             } else {
                 $output = $this->context->smarty->fetch($this->local_path . 'views/templates/admin/configure.tpl');
-                $output = $this->displayConfirmation($this->l('Поздравляем, сайт успешно привязан к аккаунту') . ' <a href="http://getsale.io" target="_blank">GetSale</a>') . $this->displayFormSuccess() . $output;
+                $output = $this->displayConfirmation($this->l('Поздравляем, сайт успешно привязан к аккаунту') . ' <a href="https://getsale.io" target="_blank">GetSale</a>') . $this->displayFormSuccess() . $output;
             }
 
             return $output;
@@ -181,13 +181,13 @@ class Getsale extends Module
                     'type' => 'free',
                     'col' => $getsale_col,
                     'desc' => $this->l('Введите email и ключ API из личного кабинета ')
-                        . '<a href="http://getsale.io" target="_blank">GetSale</a>',
+                        . '<a href="https://getsale.io" target="_blank">GetSale</a>',
                     'name' => 'text'),
                 array(
                     'type' => 'free',
                     'col' => $getsale_col,
                     'desc' => $this->l('Если вы ещё не зарегистрировались в сервисе GetSale это можно
-                    сделать по ссылке ') . '<a href="http://getsale.io" target="_blank">GetSale</a>',
+                    сделать по ссылке ') . '<a href="https://getsale.io" target="_blank">GetSale</a>',
                     'name' => 'text'),
                 array(
                     'type' => 'free',
@@ -274,7 +274,7 @@ class Getsale extends Module
                     'type' => 'free',
                     'col' => $getsale_col,
                     'desc' => $this->l('Войдите в личный кабинет ')
-                        . '<a href="http://getsale.io" target="_blank">GetSale</a>'
+                        . '<a href="https://getsale.io" target="_blank">GetSale</a>'
                         . $this->l(' для просмотра статистики.'),
                     'name' => 'text'),
                 array(
@@ -357,7 +357,7 @@ class Getsale extends Module
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type:application/json', 'Accept: application/json'));
-        curl_setopt($ch, CURLOPT_URL, "http://edge.getsale.io/api/registration.json");
+        curl_setopt($ch, CURLOPT_URL, "https://getsale.io/api/registration.json");
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $jsondata);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -380,7 +380,7 @@ class Getsale extends Module
                 }
                 if ($json_result->code == '404') {
                     $json_result->message = $this->l('Данный email ') . $email . $this->l(' не
-                    зарегистрирован на сайте http://getsale.io');
+                    зарегистрирован на сайте https://getsale.io');
                 }
                 if (!isset($json_result->code)) {
                     $json_result->message = $this->l('Неверный формат данных.');
@@ -481,7 +481,7 @@ class Getsale extends Module
                       f = function () { n.parentNode.insertBefore(s, n); };
                       s.type = 'text/javascript';
                       s.async = true;
-                      s.src = '//rt.edge.getsale.io/loader.js';
+                      s.src = '//rt.getsale.io/loader.js';
                       if (w.opera == '[object Opera]') {
                           d.addEventListener('DOMContentLoaded', f, false);
                       } else { f(); }

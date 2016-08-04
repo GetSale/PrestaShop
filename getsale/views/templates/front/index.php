@@ -2,7 +2,7 @@
 /**
  * 2016 GetSale
  *
- * @author    GetSale Team <http://getsale.io/>
+ * @author    GetSale Team <https://getsale.io/>
  * @copyright 2016 GetSale
  * @license   GNU General Public License, version 3
  */
